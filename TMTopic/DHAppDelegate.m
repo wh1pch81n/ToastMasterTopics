@@ -43,4 +43,25 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - user defaults
+
+- (void)registerUserDefaults {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:
+     @{
+       @"persistentArrayOfTopics":[self defaultArrayOfTopics]
+       }];
+}
+
+- (NSArray *)defaultArrayOfTopics {
+    NSArray *arrOfTableTopics = @[
+                                  @"What inspries you?",
+                                  @"What books do you like to read?",
+                                  @"What would you like to learn?",
+                                  @"Who has influenced your life the most?"
+                                  ];
+    
+    return arrOfTableTopics;
+}
+
+
 @end
