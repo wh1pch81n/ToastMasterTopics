@@ -8,11 +8,15 @@
 
 #import "DHAppDelegate.h"
 
+NSString *const kUDPersistentArrOfTopics = @"kUDPersistentArrOfTopics";
+
 @implementation DHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [self registerUserDefaults];
+    
     return YES;
 }
 							
@@ -48,7 +52,7 @@
 - (void)registerUserDefaults {
     [[NSUserDefaults standardUserDefaults] registerDefaults:
      @{
-       @"persistentArrayOfTopics":[self defaultArrayOfTopics]
+       kUDPersistentArrOfTopics:[self defaultArrayOfTopics]
        }];
 }
 
