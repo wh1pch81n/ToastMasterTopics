@@ -21,6 +21,7 @@
 		7F6DDC7A191EF75000925412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DDC5C191EF74F00925412 /* UIKit.framework */; };
 		7F6DDC82191EF75000925412 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DDC80191EF75000925412 /* InfoPlist.strings */; };
 		7F6DDC84191EF75000925412 /* TMTopicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F6DDC83191EF75000925412 /* TMTopicTests.m */; };
+		7F6DDC8F19204CD400925412 /* BigListOfTableTopics in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DDC8E19204CD400925412 /* BigListOfTableTopics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		7F6DDC7F191EF75000925412 /* TMTopicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TMTopicTests-Info.plist"; sourceTree = "<group>"; };
 		7F6DDC81191EF75000925412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7F6DDC83191EF75000925412 /* TMTopicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMTopicTests.m; sourceTree = "<group>"; };
+		7F6DDC8E19204CD400925412 /* BigListOfTableTopics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BigListOfTableTopics; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				7F6DDC6A191EF74F00925412 /* Main.storyboard */,
 				7F6DDC6D191EF74F00925412 /* DHViewController.h */,
 				7F6DDC6E191EF74F00925412 /* DHViewController.m */,
+				7F6DDC8E19204CD400925412 /* BigListOfTableTopics */,
 				7F6DDC70191EF74F00925412 /* Images.xcassets */,
 				7F6DDC5F191EF74F00925412 /* Supporting Files */,
 			);
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F6DDC71191EF74F00925412 /* Images.xcassets in Resources */,
+				7F6DDC8F19204CD400925412 /* BigListOfTableTopics in Resources */,
 				7F6DDC63191EF74F00925412 /* InfoPlist.strings in Resources */,
 				7F6DDC6C191EF74F00925412 /* Main.storyboard in Resources */,
 			);
