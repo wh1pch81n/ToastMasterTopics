@@ -27,6 +27,8 @@ NSString *const kMaxValue = @"max_value";
 
 NSString *const kHost = @"tmtimer328";
 
+NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n/ToastMasterTopics/master/TMTopic/BigListOfTableTopics";
+
 @interface DHViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *url_args;
@@ -79,15 +81,51 @@ NSString *const kHost = @"tmtimer328";
 - (void)loadTableTopicsFromOnline {
     #warning needs implementing
     NSError *err = nil;
-    NSString *str = [NSString stringWithContentsOfURL:nil encoding:NSUTF8StringEncoding error:&err];
+    
+    NSURL *url = [NSURL URLWithString:kOnlineTopicsURL];
+    NSString *str = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&err];
     //Check if there was an error or not  if no error then compare the new array to the one you currently have
+    if (err || !str) {
+        //something wrong happened... try again on next launch.
+        return;
+    }
     //If it is a different size, then you should update the persistent version
+    
+#if DEBUG
+    NSLog(@"String from URL: \n%@ ", str);
+#endif
+    
+    [self parseTextForTopics:str];
 }
 
 - (void)launchAsyncURLCall {
     [NSThread detachNewThreadSelector:@selector(loadTableTopicsFromOnline) toTarget:self withObject:nil];
 }
 
+#pragma mark - regular expression regex
+
+- (void)parseTextForTopics:(NSString *)text {
+    NSString *pattern = @"<topic>.*</topic>";
+    NSError *err;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&err];
+    if (err) {
+        return;
+    }
+    NSMutableArray *mut = [NSMutableArray new];
+    NSLog(@"runing reg");
+    [regex enumerateMatchesInString:text
+                            options:0
+                              range:NSMakeRange(0, text.length)
+                         usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                             
+                             NSRange range = NSMakeRange(result.range.location + @"<topic>".length, result.range.length - @"<topic>".length - @"</topic>".length);
+                             
+                             NSLog(@"block result: &%@&\n", [text substringWithRange:range]);
+                             [mut addObject:[text substringWithRange:range]];
+                         }];
+    NSLog(@"done reg");
+    NSLog(@"mut: %@", mut);
+}
 
 #pragma mark - Buttons
 

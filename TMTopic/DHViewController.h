@@ -14,6 +14,8 @@ extern NSString *const kMaxValue;
 
 extern NSString *const kHost;
 
+extern NSString *const kOnlineTopicsURL;
+
 @interface DHViewController : UIViewController
 
 @end
