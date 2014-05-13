@@ -70,7 +70,14 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
 }
 
 - (void)loadLabelWithTopic {
-    int i = arc4random() % self.arrOfTopics.count;
+    static int last_i = 0;
+    int i;
+    // To prevent randomly picking that same number as last time
+    do {
+        i = arc4random() % self.arrOfTopics.count;
+    } while (last_i == i);
+    last_i = i;
+    
     [[self tableTopicLabel] setText:self.arrOfTopics[i]];
     
     [self.url_args setObject:self.arrOfTopics[i] forKey:kName];
@@ -95,7 +102,10 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     NSLog(@"String from URL: \n%@ ", str);
 #endif
     
-    [self parseTextForTopics:str];
+    NSArray *newList = [self parseTextForTopics:str];
+    if (newList) {
+        //TODO: Put the mut words into the persistent memory (user defaults), but only if it is different then teh current one
+    }
 }
 
 - (void)launchAsyncURLCall {
@@ -104,12 +114,12 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
 
 #pragma mark - regular expression regex
 
-- (void)parseTextForTopics:(NSString *)text {
+- (NSArray *)parseTextForTopics:(NSString *)text {
     NSString *pattern = @"<topic>.*</topic>";
     NSError *err;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&err];
     if (err) {
-        return;
+        return nil;
     }
     NSMutableArray *mut = [NSMutableArray new];
     NSLog(@"runing reg");
@@ -125,6 +135,8 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
                          }];
     NSLog(@"done reg");
     NSLog(@"mut: %@", mut);
+
+    return mut;
 }
 
 #pragma mark - Buttons
