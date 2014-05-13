@@ -104,7 +104,11 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     
     NSArray *newList = [self parseTextForTopics:str];
     if (newList) {
-        //TODO: Put the mut words into the persistent memory (user defaults), but only if it is different then teh current one
+        NSArray *currentList = [[NSUserDefaults standardUserDefaults] objectForKey:kUDPersistentArrOfTopics];
+        if ([self isArrayOfStrings:currentList equalToArrayOfStrings:newList] == NO) {
+            [[NSUserDefaults standardUserDefaults] setObject:newList forKey:kUDPersistentArrOfTopics];
+            [self setArrOfTopics:newList];
+        }
     }
 }
 
@@ -121,22 +125,19 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     if (err) {
         return nil;
     }
-    NSMutableArray *mut = [NSMutableArray new];
-    NSLog(@"runing reg");
+    NSMutableArray *mutArrayOfTopics = [NSMutableArray new];
+ 
     [regex enumerateMatchesInString:text
                             options:0
                               range:NSMakeRange(0, text.length)
                          usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-                             
+                             //remove xml tags
                              NSRange range = NSMakeRange(result.range.location + @"<topic>".length, result.range.length - @"<topic>".length - @"</topic>".length);
                              
                              NSLog(@"block result: &%@&\n", [text substringWithRange:range]);
-                             [mut addObject:[text substringWithRange:range]];
+                             [mutArrayOfTopics addObject:[text substringWithRange:range]];
                          }];
-    NSLog(@"done reg");
-    NSLog(@"mut: %@", mut);
-
-    return mut;
+    return mutArrayOfTopics;
 }
 
 #pragma mark - Buttons
@@ -163,5 +164,29 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     [self loadLabelWithTopic];
 }
 
+#pragma mark - comparing Array of strings 
+
+/**
+ checks if the lengths of each aray are equal.
+ Then checks the type of each object responds to isequaltostring
+*/
+- (BOOL)isArrayOfStrings:(NSArray *)arr_A equalToArrayOfStrings:(NSArray *)arr_B {
+    if (arr_A.count != arr_B.count) {
+        return NO;
+    }
+    
+    for (int i = 0; i < arr_A.count; ++i) {
+        id A = arr_A[i];
+        id B = arr_B[i];
+        if ([A respondsToSelector:@selector(isEqualToString:)] && [B respondsToSelector:@selector(isEqualToString:)]) {
+            if ([A isEqualToString:B] == NO) {
+                return NO;
+            }
+        } else {
+            return NO;
+        }
+    }
+    return YES;
+}
 
 @end
