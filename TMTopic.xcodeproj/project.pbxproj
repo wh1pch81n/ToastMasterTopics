@@ -384,6 +384,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMTopic/TMTopic-Prefix.pch";
 				INFOPLIST_FILE = "TMTopic/TMTopic-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -397,6 +398,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMTopic/TMTopic-Prefix.pch";
 				INFOPLIST_FILE = "TMTopic/TMTopic-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -461,6 +463,7 @@
 				7F6DDC89191EF75000925412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7F6DDC8A191EF75000925412 /* Build configuration list for PBXNativeTarget "TMTopicTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +472,7 @@
 				7F6DDC8C191EF75000925412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
