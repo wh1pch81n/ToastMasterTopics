@@ -133,8 +133,9 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
                          usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                              //remove xml tags
                              NSRange range = NSMakeRange(result.range.location + @"<topic>".length, result.range.length - @"<topic>".length - @"</topic>".length);
-                             
+#if DEBUG
                              NSLog(@"block result: &%@&\n", [text substringWithRange:range]);
+#endif
                              [mutArrayOfTopics addObject:[text substringWithRange:range]];
                          }];
     return mutArrayOfTopics;
