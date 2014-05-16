@@ -55,6 +55,12 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [self setArrOfTopics:[NSArray arrayWithArray:[ud objectForKey:kUDPersistentArrOfTopics]]];
     [self loadLabelWithTopic];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[self generateTMTimer328URLScheme]] == NO) {
+        [[self launchTMTimerAppButton] setHidden:YES];
+    } else {
+        [[self launchTMTimerAppButton] setHidden:NO];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -143,12 +149,18 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
 
 #pragma mark - Buttons
 
-- (IBAction)tappedLaunchToastmasterTimerButton:(id)sender {
-
+- (NSURL *)generateTMTimer328URLScheme {
     NSData *json_data = [NSJSONSerialization dataWithJSONObject:self.url_args options:0 error:nil];
     NSString *json_str = [[NSString alloc] initWithData:json_data encoding:NSUTF8StringEncoding];
     json_str = [NSString stringWithFormat:@"%@:%@", kHost, json_str];
     NSURL *url = [NSURL URLWithString:[json_str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    return url;
+}
+
+- (IBAction)tappedLaunchToastmasterTimerButton:(id)sender {
+    NSURL *url = [self generateTMTimer328URLScheme];
+    
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
 #if DEBUG
         NSLog(@"About to open TMTimer via url with query: %@", self.url_args);
@@ -157,6 +169,7 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     } else {
 #if DEBUG
         NSLog(@"Could not open TMTimer");
+        //TODO: Should launch the app store webpage.  Do it later.
 #endif
     }
 }
