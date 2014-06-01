@@ -37,6 +37,7 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
 @property (weak, nonatomic) IBOutlet UILabel *tableTopicLabel;
 @property (weak, nonatomic) IBOutlet UIButton *launchTMTimerAppButton;
 @property (weak, nonatomic) IBOutlet UIButton *buttonNewTopic;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingGear;
 
 @end
 
@@ -63,12 +64,6 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self launchAsyncURLCall];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -92,7 +87,8 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
 #pragma mark - asyncronous calls
 
 - (void)loadTableTopicsFromOnline {
-    #warning needs implementing
+    
+    
     NSError *err = nil;
     
     NSURL *url = [NSURL URLWithString:kOnlineTopicsURL];
@@ -116,9 +112,14 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
             [self setArrOfTopics:newList];
         }
     }
+    
+    [self.loadingGear performSelectorOnMainThread:@selector(stopAnimating)
+                                       withObject:nil
+                                    waitUntilDone:NO];
 }
 
 - (void)launchAsyncURLCall {
+    [self.loadingGear startAnimating];
     [NSThread detachNewThreadSelector:@selector(loadTableTopicsFromOnline) toTarget:self withObject:nil];
 }
 

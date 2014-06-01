@@ -18,4 +18,6 @@ extern NSString *const kOnlineTopicsURL;
 
 @interface DHViewController : UIViewController
 
+- (void)launchAsyncURLCall;
+
 @end
