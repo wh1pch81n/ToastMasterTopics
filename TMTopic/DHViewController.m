@@ -64,12 +64,6 @@ NSString *const kOnlineTopicsURL = @"https://raw.githubusercontent.com/wh1pch81n
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self launchAsyncURLCall];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
