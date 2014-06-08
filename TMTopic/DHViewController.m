@@ -126,7 +126,7 @@ NSString *const kTopicArray = @"arrOfTopics";
 - (void)loadLabelwithPrevTopic {
     int prev = self.currArrOfTopicsIndex.intValue - 1;
     if (prev < 0) {
-        prev = self.arrOfTopics.count -1;
+        prev = (int)self.arrOfTopics.count -1;
     }
     self.currArrOfTopicsIndex = @(prev);
 }
