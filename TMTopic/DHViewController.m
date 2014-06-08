@@ -175,6 +175,9 @@ NSString *const kTopicArray = @"arrOfTopics";
     //Check if there was an error or not  if no error then compare the new array to the one you currently have
     if (err || !str) {
         //something wrong happened... try again on next launch.
+        [self.loadingGear performSelectorOnMainThread:@selector(stopAnimating)
+                                           withObject:nil
+                                        waitUntilDone:NO];
         return;
     }
     //If it is a different size, then you should update the persistent version
