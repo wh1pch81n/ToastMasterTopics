@@ -22,6 +22,7 @@
 		7F6DDC82191EF75000925412 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DDC80191EF75000925412 /* InfoPlist.strings */; };
 		7F6DDC84191EF75000925412 /* TMTopicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F6DDC83191EF75000925412 /* TMTopicTests.m */; };
 		7F6DDC8F19204CD400925412 /* BigListOfTableTopics in Resources */ = {isa = PBXBuildFile; fileRef = 7F6DDC8E19204CD400925412 /* BigListOfTableTopics */; };
+		7F8EEA731943FC0B006B4C53 /* DHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8EEA721943FC0B006B4C53 /* DHTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		7F6DDC81191EF75000925412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7F6DDC83191EF75000925412 /* TMTopicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMTopicTests.m; sourceTree = "<group>"; };
 		7F6DDC8E19204CD400925412 /* BigListOfTableTopics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BigListOfTableTopics; sourceTree = "<group>"; };
+		7F8EEA711943FC0B006B4C53 /* DHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHTableViewCell.h; sourceTree = "<group>"; };
+		7F8EEA721943FC0B006B4C53 /* DHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				7F6DDC67191EF74F00925412 /* DHAppDelegate.h */,
 				7F6DDC68191EF74F00925412 /* DHAppDelegate.m */,
 				7F6DDC6A191EF74F00925412 /* Main.storyboard */,
+				7F8EEA711943FC0B006B4C53 /* DHTableViewCell.h */,
+				7F8EEA721943FC0B006B4C53 /* DHTableViewCell.m */,
 				7F6DDC6D191EF74F00925412 /* DHViewController.h */,
 				7F6DDC6E191EF74F00925412 /* DHViewController.m */,
 				7F6DDC8E19204CD400925412 /* BigListOfTableTopics */,
@@ -257,6 +262,7 @@
 				7F6DDC69191EF74F00925412 /* DHAppDelegate.m in Sources */,
 				7F6DDC6F191EF74F00925412 /* DHViewController.m in Sources */,
 				7F6DDC65191EF74F00925412 /* main.m in Sources */,
+				7F8EEA731943FC0B006B4C53 /* DHTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
