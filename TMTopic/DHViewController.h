@@ -16,7 +16,7 @@ extern NSString *const kHost;
 
 extern NSString *const kOnlineTopicsURL;
 
-@interface DHViewController : UIViewController
+@interface DHViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (void)launchAsyncURLCall;
 
