@@ -135,6 +135,7 @@
                     <connections>
                         <outlet property="launchTMTimerAppButton" destination="vAh-3z-u8N" id="hGm-lQ-kMK"/>
                         <outlet property="loadingGear" destination="0HD-Qw-cQt" id="NMe-bK-pfB"/>
+                        <outlet property="sourceButton" destination="mNq-kL-n41" id="ImA-ua-K4R"/>
                         <outlet property="tableTopicLabel" destination="RO0-eI-nws" id="dYX-XP-PUF"/>
                         <outlet property="topicNumberOutOfTotal" destination="aQT-10-InY" id="VxE-T1-mfM"/>
                     </connections>

@@ -50,6 +50,8 @@ NSString *const kTopicArray = @"arrOfTopics";
 
 @property (weak, nonatomic) IBOutlet UILabel *topicNumberOutOfTotal;
 
+@property (weak, nonatomic) IBOutlet UIButton *sourceButton;
+
 @end
 
 @implementation DHViewController
@@ -134,6 +136,8 @@ NSString *const kTopicArray = @"arrOfTopics";
 #pragma mark - asyncronous calls
 
 - (void)loadSourceListAsync {
+    [self.sourceButton setAlpha:0];
+    [self.sourceButton setUserInteractionEnabled:NO];
     __weak typeof(self)weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
@@ -159,6 +163,11 @@ NSString *const kTopicArray = @"arrOfTopics";
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof(weakSelf)strongSelf = weakSelf;
             [strongSelf.tableView reloadData];
+            [UIView animateWithDuration:0.5 animations:^{
+                [strongSelf.sourceButton setAlpha:1];
+            } completion:^(BOOL finished) {
+                [strongSelf.sourceButton setUserInteractionEnabled:YES];
+            }];
         });
     });
 }
