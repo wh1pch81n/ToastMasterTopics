@@ -34,6 +34,8 @@ NSString *const kOnlineSourcesURL =  @"https://raw.githubusercontent.com/wh1pch8
 NSString *const kTopicNumberTotal = @"currArrOfTopicsIndex";
 NSString *const kTopicArray = @"arrOfTopics";
 
+NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-timer/id837916943?ls=1&mt=8";
+
 @interface DHViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *url_args;
@@ -75,15 +77,7 @@ NSString *const kTopicArray = @"arrOfTopics";
     [self addObserver:self forKeyPath:kTopicNumberTotal
                                    options:NSKeyValueObservingOptionNew context:nil];
     
-    
     [self loadLabelWithRandomTopic];
-    
-    if ([[UIApplication sharedApplication] canOpenURL:[self generateTMTimer328URLScheme]] == NO) {
-        [[self launchTMTimerAppButton] setHidden:YES];
-    } else {
-        [[self launchTMTimerAppButton] setHidden:NO];
-    }
-    
     [self loadSourceListAsync];
 }
 
@@ -280,8 +274,9 @@ NSString *const kTopicArray = @"arrOfTopics";
     } else {
 #if DEBUG
         NSLog(@"Could not open TMTimer");
-        //TODO: Should launch the app store webpage.  Do it later.
 #endif
+        url = [NSURL URLWithString:kTMTimerURL relativeToURL:nil];
+        [[UIApplication sharedApplication] openURL:url];
     }
 }
 
