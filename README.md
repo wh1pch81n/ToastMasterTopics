@@ -3,9 +3,9 @@ ToastMasterTopics
 
 If you need a random table topic for toastmasters or just a something to start a conversation.
 
--get topic (previous/next/random)
--Open TMTimer
--Sources
+- get topic (previous/next/random)
+- Open TMTimer
+- Sources
 
 ###get topic (previous/next/random)
   A list of table topics will be taken from an online source which is still growing.  On Application start it will choose a random topic.  You have the option of picking another random topic via the 'random' button or you may go through the list iteratively using the 'prev' and 'next' buttons.
