@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
 
 extern NSString *const kName;
 extern NSString *const kMinValue;

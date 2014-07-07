@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F185BB4196A61D600055446 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F185BB3196A61D600055446 /* iAd.framework */; };
+		7F185BB8196A65A700055446 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F185BB7196A65A700055446 /* iRate.m */; };
 		7F6DDC59191EF74F00925412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DDC58191EF74F00925412 /* Foundation.framework */; };
 		7F6DDC5B191EF74F00925412 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DDC5A191EF74F00925412 /* CoreGraphics.framework */; };
 		7F6DDC5D191EF74F00925412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DDC5C191EF74F00925412 /* UIKit.framework */; };
@@ -53,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F185BB3196A61D600055446 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		7F185BB6196A65A700055446 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		7F185BB7196A65A700055446 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		7F6DDC55191EF74F00925412 /* TMTopic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMTopic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6DDC58191EF74F00925412 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F6DDC5A191EF74F00925412 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -99,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F185BB4196A61D600055446 /* iAd.framework in Frameworks */,
 				7F6DDC5B191EF74F00925412 /* CoreGraphics.framework in Frameworks */,
 				7F6DDC5D191EF74F00925412 /* UIKit.framework in Frameworks */,
 				7F6DDC59191EF74F00925412 /* Foundation.framework in Frameworks */,
@@ -118,9 +124,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F185BB5196A659400055446 /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				7F185BB6196A65A700055446 /* iRate.h */,
+				7F185BB7196A65A700055446 /* iRate.m */,
+			);
+			name = iRate;
+			sourceTree = "<group>";
+		};
 		7F6DDC4C191EF74F00925412 = {
 			isa = PBXGroup;
 			children = (
+				7F185BB5196A659400055446 /* iRate */,
 				7F6DDC5E191EF74F00925412 /* TMTopic */,
 				7F6DDC7D191EF75000925412 /* TMTopicTests */,
 				7F6DDC57191EF74F00925412 /* Frameworks */,
@@ -140,6 +156,7 @@
 		7F6DDC57191EF74F00925412 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F185BB3196A61D600055446 /* iAd.framework */,
 				7F6DDC58191EF74F00925412 /* Foundation.framework */,
 				7F6DDC5A191EF74F00925412 /* CoreGraphics.framework */,
 				7F6DDC5C191EF74F00925412 /* UIKit.framework */,
@@ -336,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F6DDC69191EF74F00925412 /* DHAppDelegate.m in Sources */,
+				7F185BB8196A65A700055446 /* iRate.m in Sources */,
 				7F6DDC6F191EF74F00925412 /* DHViewController.m in Sources */,
 				7F6DDC65191EF74F00925412 /* main.m in Sources */,
 				7F8EEA731943FC0B006B4C53 /* DHTableViewCell.m in Sources */,
@@ -466,7 +484,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMTopic/TMTopic-Prefix.pch";
 				INFOPLIST_FILE = "TMTopic/TMTopic-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -481,7 +499,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMTopic/TMTopic-Prefix.pch";
 				INFOPLIST_FILE = "TMTopic/TMTopic-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

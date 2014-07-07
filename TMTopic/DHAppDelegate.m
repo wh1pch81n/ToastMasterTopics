@@ -8,10 +8,17 @@
 
 #import "DHAppDelegate.h"
 #import "DHViewController.h"
+#import "iRate.h"
 
 NSString *const kUDPersistentArrOfTopics = @"kUDPersistentArrOfTopics";
 
 @implementation DHAppDelegate
+
++ (void)initialize {
+#if DEBUG
+    [[iRate sharedInstance] setPreviewMode:YES];
+#endif
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

@@ -62,7 +62,8 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-   
+    self.canDisplayBannerAds = YES;
+    
     self.url_args = [@{
                        kName: @"Hello world",
                        kMinValue: @1,
@@ -106,7 +107,7 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     int i;
     // To prevent randomly picking that same number as last time
     do {
-        i = arc4random() % self.arrOfTopics.count;
+        i = arc4random_uniform((u_int32_t)self.arrOfTopics.count);
     } while (last_i == i);
     self.currArrOfTopicsIndex = @(i);
 }
