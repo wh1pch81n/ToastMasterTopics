@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F185BB4196A61D600055446 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F185BB3196A61D600055446 /* iAd.framework */; };
 		7F185BB8196A65A700055446 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F185BB7196A65A700055446 /* iRate.m */; };
+		7F185BBA196A6AE200055446 /* BigListOfSources in Resources */ = {isa = PBXBuildFile; fileRef = 7F185BB9196A6AE200055446 /* BigListOfSources */; };
 		7F6DDC59191EF74F00925412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DDC58191EF74F00925412 /* Foundation.framework */; };
 		7F6DDC5B191EF74F00925412 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DDC5A191EF74F00925412 /* CoreGraphics.framework */; };
 		7F6DDC5D191EF74F00925412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6DDC5C191EF74F00925412 /* UIKit.framework */; };
@@ -58,6 +59,7 @@
 		7F185BB3196A61D600055446 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		7F185BB6196A65A700055446 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		7F185BB7196A65A700055446 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
+		7F185BB9196A6AE200055446 /* BigListOfSources */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BigListOfSources; sourceTree = "<group>"; };
 		7F6DDC55191EF74F00925412 /* TMTopic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMTopic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6DDC58191EF74F00925412 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F6DDC5A191EF74F00925412 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -177,6 +179,7 @@
 				7F6DDC6E191EF74F00925412 /* DHViewController.m */,
 				7F9D9B401946593B00EE381B /* images */,
 				7F6DDC8E19204CD400925412 /* BigListOfTableTopics */,
+				7F185BB9196A6AE200055446 /* BigListOfSources */,
 				7F6DDC70191EF74F00925412 /* Images.xcassets */,
 				7F6DDC5F191EF74F00925412 /* Supporting Files */,
 			);
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FA34E401948D564000DB7B5 /* Icon76x76@2x.png in Resources */,
+				7F185BBA196A6AE200055446 /* BigListOfSources in Resources */,
 				7F6DDC71191EF74F00925412 /* Images.xcassets in Resources */,
 				7FA34E411948D564000DB7B5 /* TMIcon-full.png in Resources */,
 				7F6DDC8F19204CD400925412 /* BigListOfTableTopics in Resources */,
