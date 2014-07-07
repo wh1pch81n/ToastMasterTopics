@@ -62,7 +62,8 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-   
+    self.canDisplayBannerAds = YES;
+    
     self.url_args = [@{
                        kName: @"Hello world",
                        kMinValue: @1,
