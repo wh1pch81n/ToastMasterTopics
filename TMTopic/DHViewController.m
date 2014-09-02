@@ -36,7 +36,7 @@ NSString *const kTopicArray = @"arrOfTopics";
 
 NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-timer/id837916943?ls=1&mt=8";
 
-@interface DHViewController ()
+@interface DHViewController () <NSXMLParserDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *url_args;
 @property (strong, nonatomic) NSArray *arrOfTopics;
@@ -56,7 +56,10 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 
 @end
 
-@implementation DHViewController
+@implementation DHViewController {
+    NSMutableArray *tempArrayOfTopics;
+    BOOL canTakeTopic;
+}
 
 - (void)viewDidLoad
 {
@@ -175,33 +178,39 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     NSError *err = nil;
     
     NSURL *url = [NSURL URLWithString:kOnlineTopicsURL];
-    NSString *str = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&err];
-    //Check if there was an error or not  if no error then compare the new array to the one you currently have
-    if (err || !str) {
-        //something wrong happened... try again on next launch.
-        [self.loadingGear performSelectorOnMainThread:@selector(stopAnimating)
-                                           withObject:nil
-                                        waitUntilDone:NO];
-        return;
-    }
-    //If it is a different size, then you should update the persistent version
-    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue new]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               if (connectionError) {
+                                   [self.loadingGear performSelectorOnMainThread:@selector(stopAnimating)
+                                                                      withObject:nil
+                                                                   waitUntilDone:NO];
+                               }
+                               NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithData:data];
+                               xmlparser.delegate = self;
+                               
+                               if (![xmlparser parse]){
+                                   return;
+                               }
+                               
+                               NSArray *newList = tempArrayOfTopics;
 #if DEBUG
-    NSLog(@"String from URL: \n%@ ", str);
+                               NSLog(@"%@", newList);
 #endif
-    
-    NSArray *newList = [self parseTextForTopics:str];
-    if (newList) {
-        NSArray *currentList = [[NSUserDefaults standardUserDefaults] objectForKey:kUDPersistentArrOfTopics];
-        if ([self isArrayOfStrings:currentList equalToArrayOfStrings:newList] == NO) {
-            [[NSUserDefaults standardUserDefaults] setObject:newList forKey:kUDPersistentArrOfTopics];
-            [self setArrOfTopics:newList];
-        }
-    }
-    
-    [self.loadingGear performSelectorOnMainThread:@selector(stopAnimating)
-                                       withObject:nil
-                                    waitUntilDone:NO];
+                               if (newList) {
+                                   NSArray *currentList = [[NSUserDefaults standardUserDefaults] objectForKey:kUDPersistentArrOfTopics];
+                                   if ([self isArrayOfStrings:currentList equalToArrayOfStrings:newList] == NO) {
+                                       [[NSUserDefaults standardUserDefaults] setObject:newList forKey:kUDPersistentArrOfTopics];
+                                       [self setArrOfTopics:newList];
+                                   }
+                               }
+                               {//stop loading when done
+                                   [self.loadingGear performSelectorOnMainThread:@selector(stopAnimating)
+                                                                      withObject:nil
+                                                                   waitUntilDone:NO];
+                               }
+                           }];
 }
 
 - (void)launchAsyncURLCall {
@@ -324,6 +333,36 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrOfSources.count;
+}
+
+
+#pragma mark - NSXMLparser
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser {
+    tempArrayOfTopics = [NSMutableArray new];
+}
+
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+    if ([elementName isEqualToString:@"topic"]) {
+#if DEBUG
+        NSLog(@"%@", elementName);
+#endif
+        canTakeTopic = YES;
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    if (canTakeTopic) {
+        canTakeTopic = NO;
+#if DEBUG
+        NSLog(@"%@", string);
+#endif
+        [tempArrayOfTopics addObject:string];
+    }
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser {
+    
 }
 
 @end
