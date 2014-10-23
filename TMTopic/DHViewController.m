@@ -85,13 +85,23 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     [self loadSourceListAsync];
 }
 
+- (void)canDisplayBannerAds:(BOOL)enableAds {
+    if ([self respondsToSelector:@selector(canDisplayBannerAds:)]) {
+        self.canDisplayBannerAds = enableAds;
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:kTopicNumberTotal] || [keyPath isEqualToString:kTopicArray]) {
-        int total = (int)self.arrOfTopics.count;
-        int topicNum = [self.currArrOfTopicsIndex intValue];
-        [self.topicNumberOutOfTotal setText:[NSString stringWithFormat:@"%d of %d", topicNum + 1, total]];
-        [[self tableTopicLabel] setText:self.arrOfTopics[topicNum]];
-        [[self url_args] setObject:self.arrOfTopics[topicNum] forKey:kName];
+    if (   [keyPath isEqualToString:NSStringFromSelector(@selector(currArrOfTopicsIndex))]
+        || [keyPath isEqualToString:NSStringFromSelector(@selector(arrOfTopics))])
+      {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            int total = (int)self.arrOfTopics.count;
+            int topicNum = [self.currArrOfTopicsIndex intValue];
+            [self.topicNumberOutOfTotal setText:[NSString stringWithFormat:@"%d of %d", topicNum + 1, total]];
+            [[self tableTopicLabel] setText:self.arrOfTopics[topicNum]];
+            [[self url_args] setObject:self.arrOfTopics[topicNum] forKey:kName];
+        });
     }
 }
 
