@@ -75,10 +75,10 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [self setArrOfTopics:[NSArray arrayWithArray:[ud objectForKey:kUDPersistentArrOfTopics]]];
-    [self addObserver:self forKeyPath:kTopicArray
+    [self addObserver:self forKeyPath:NSStringFromSelector(@selector(arrOfTopics))
                           options:NSKeyValueObservingOptionNew context:nil];
     [self setCurrArrOfTopicsIndex:[NSNumber new]];
-    [self addObserver:self forKeyPath:kTopicNumberTotal
+    [self addObserver:self forKeyPath:NSStringFromSelector(@selector(currArrOfTopicsIndex))
                                    options:NSKeyValueObservingOptionNew context:nil];
     
     [self loadLabelWithRandomTopic];
@@ -103,6 +103,11 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
             [[self url_args] setObject:self.arrOfTopics[topicNum] forKey:kName];
         });
     }
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(currArrOfTopicsIndex))];
+    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(arrOfTopics))];
 }
 
 - (void)didReceiveMemoryWarning
