@@ -22,6 +22,9 @@
 #import "DHAppDelegate.h"
 #import "DHTableViewCell.h"
 
+#define isIOS6 floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1
+#define isIOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
+
 NSString *const kName = @"name";
 NSString *const kMinValue = @"min_value";
 NSString *const kMaxValue = @"max_value";
@@ -65,7 +68,7 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.canDisplayBannerAds = YES;
+    //self.canDisplayBannerAds = YES;
     
     self.url_args = [@{
                        kName: @"Hello world",
@@ -85,11 +88,11 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     [self loadSourceListAsync];
 }
 
-- (void)canDisplayBannerAds:(BOOL)enableAds {
-    if ([self respondsToSelector:@selector(canDisplayBannerAds:)]) {
-        self.canDisplayBannerAds = enableAds;
-    }
-}
+//- (void)setCanDisplayBannerAds:(BOOL)b {
+//    if (UIDevice.currentDevice.systemVersion.floatValue >= 7) {
+//        [super setCanDisplayBannerAds:b];
+//    }
+//}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (   [keyPath isEqualToString:NSStringFromSelector(@selector(currArrOfTopicsIndex))]
@@ -125,7 +128,7 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     int i;
     // To prevent randomly picking that same number as last time
     do {
-        i = arc4random_uniform((u_int32_t)self.arrOfTopics.count);
+        i = arc4random_uniform((uint32_t)self.arrOfTopics.count);
     } while (last_i == i);
     self.currArrOfTopicsIndex = @(i);
 }
