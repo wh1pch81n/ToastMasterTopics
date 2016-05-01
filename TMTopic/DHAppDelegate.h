@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString *const kUDPersistentArrOfTopics;
+extern NSString *const kUDLastUpdatedArray;
 
 @interface DHAppDelegate : UIResponder <UIApplicationDelegate>
 

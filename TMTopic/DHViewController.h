@@ -20,5 +20,6 @@ extern NSString *const kOnlineTopicsURL;
 @interface DHViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (void)launchAsyncURLCall;
+- (int)refreshTableTopicsFromOnline;
 
 @end

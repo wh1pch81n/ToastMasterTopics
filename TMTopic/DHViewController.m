@@ -53,6 +53,7 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 @property (weak, nonatomic) IBOutlet UILabel *topicNumberOutOfTotal;
 
 @property (weak, nonatomic) IBOutlet UIButton *sourceButton;
+@property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
 
 @end
 
@@ -64,6 +65,14 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:kUDLastUpdatedArray];
+	if (date) {
+		NSDateFormatter *df = [NSDateFormatter new];
+		df.dateStyle = NSDateFormatterMediumStyle;
+		self.lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [df stringFromDate:date]];
+	} else {
+		self.lastUpdatedLabel.text = @"";
+	}
 	// Do any additional setup after loading the view, typically from a nib.
     self.canDisplayBannerAds = YES;
     
@@ -75,14 +84,22 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [self setArrOfTopics:[NSArray arrayWithArray:[ud objectForKey:kUDPersistentArrOfTopics]]];
-    [self addObserver:self forKeyPath:NSStringFromSelector(@selector(arrOfTopics))
-                          options:NSKeyValueObservingOptionNew context:nil];
-    [self setCurrArrOfTopicsIndex:[NSNumber new]];
-    [self addObserver:self forKeyPath:NSStringFromSelector(@selector(currArrOfTopicsIndex))
-                                   options:NSKeyValueObservingOptionNew context:nil];
-    
-    [self loadLabelWithRandomTopic];
-    [self loadSourceListAsync];
+	[self setCurrArrOfTopicsIndex:[NSNumber new]];
+	
+	
+	int total = (int)self.arrOfTopics.count;
+	int topicNum = [self.currArrOfTopicsIndex intValue];
+	[self.topicNumberOutOfTotal setText:[NSString stringWithFormat:@"%d of %d", topicNum + 1, total]];
+	[[self tableTopicLabel] setText:self.arrOfTopics[topicNum]];
+	[[self url_args] setObject:self.arrOfTopics[topicNum] forKey:kName];
+	[self loadLabelWithRandomTopic];
+	[self loadSourceListAsync];
+	if (self.arrOfTopics.count <= 4) {
+		[self launchAsyncURLCall];
+	}
+	self.tableView.estimatedRowHeight = 44;
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
+	
 }
 
 - (void)canDisplayBannerAds:(BOOL)enableAds {
@@ -105,9 +122,18 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
     }
 }
 
-- (void)dealloc {
-    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(currArrOfTopicsIndex))];
-    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(arrOfTopics))];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	[self addObserver:self forKeyPath:NSStringFromSelector(@selector(arrOfTopics))
+			  options:NSKeyValueObservingOptionNew context:nil];
+	[self addObserver:self forKeyPath:NSStringFromSelector(@selector(currArrOfTopicsIndex))
+			  options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(currArrOfTopicsIndex))];
+	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(arrOfTopics))];
 }
 
 - (void)didReceiveMemoryWarning
@@ -228,9 +254,49 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
                            }];
 }
 
+/**
+ downloads and saves to the nsuser defaults if needed.
+ return 1 if got new data
+ 0 if got same data 
+ -1 if there was an error
+ */
+- (int)refreshTableTopicsFromOnline {
+	NSError *err = nil;
+	
+	NSURL *url = [NSURL URLWithString:kOnlineTopicsURL];
+	NSData *data = [NSData dataWithContentsOfURL:url];
+	if (data == nil) {
+		return -1;
+	}
+	
+	NSXMLParser *xmlparser = [[NSXMLParser alloc] initWithData:data];
+	xmlparser.delegate = self;
+	
+	if (![xmlparser parse]){
+		return -1;
+	}
+							   
+	NSArray *newList = tempArrayOfTopics;
+	if (newList == nil) {
+		return -1;
+	}
+#if DEBUG
+	NSLog(@"%@", newList);
+#endif
+	NSArray *currentList = [[NSUserDefaults standardUserDefaults] objectForKey:kUDPersistentArrOfTopics];
+	if ([self isArrayOfStrings:currentList equalToArrayOfStrings:newList] == NO) {
+		[[NSUserDefaults standardUserDefaults] setObject:newList forKey:kUDPersistentArrOfTopics];
+		[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDLastUpdatedArray];
+		return 1;
+	}
+	return 0;
+}
+
 - (void)launchAsyncURLCall {
     [self.loadingGear startAnimating];
-    [NSThread detachNewThreadSelector:@selector(loadTableTopicsFromOnline) toTarget:self withObject:nil];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		[self loadTableTopicsFromOnline];
+	});
 }
 
 #pragma mark - regular expression regex
@@ -339,9 +405,9 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 #pragma mark - TableView
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DHTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sourceCell" forIndexPath:indexPath];
-    
-    [cell.sourceURLTextView setText:self.arrOfSources[indexPath.row]];
+	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+	cell.textLabel.text = self.arrOfSources[indexPath.row];
+	cell.textLabel.numberOfLines = 0;
     
     return cell;
 }

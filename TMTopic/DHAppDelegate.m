@@ -11,6 +11,7 @@
 #import "iRate.h"
 
 NSString *const kUDPersistentArrOfTopics = @"kUDPersistentArrOfTopics";
+NSString *const kUDLastUpdatedArray = @"kUDLastUpdatedArray";
 
 @implementation DHAppDelegate
 
@@ -24,6 +25,7 @@ NSString *const kUDPersistentArrOfTopics = @"kUDPersistentArrOfTopics";
 {
     // Override point for customization after application launch.
     [self registerUserDefaults];
+	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     return YES;
 }
 							
@@ -48,7 +50,7 @@ NSString *const kUDPersistentArrOfTopics = @"kUDPersistentArrOfTopics";
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    [(DHViewController *)self.window.rootViewController launchAsyncURLCall];
+//    [(DHViewController *)self.window.rootViewController launchAsyncURLCall];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -71,9 +73,24 @@ NSString *const kUDPersistentArrOfTopics = @"kUDPersistentArrOfTopics";
                                   @"What books do you like to read?",
                                   @"What would you like to learn?",
                                   @"Who has influenced your life the most?"
-                                  ];
+								  ];
     
     return arrOfTableTopics;
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+	DHViewController *vc = [DHViewController new];
+	switch ([vc refreshTableTopicsFromOnline]) {
+		case 1:
+			completionHandler(UIBackgroundFetchResultNewData);
+			break;
+		case 0:
+			completionHandler(UIBackgroundFetchResultNoData);
+			break;
+		case -1:
+			completionHandler(UIBackgroundFetchResultFailed);
+			break;
+	}
 }
 
 
