@@ -215,9 +215,6 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
 
 - (void)loadTableTopicsFromOnline {
     
-    
-    NSError *err = nil;
-    
     NSURL *url = [NSURL URLWithString:kOnlineTopicsURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
@@ -260,9 +257,7 @@ NSString *const kTMTimerURL = @"https://itunes.apple.com/us/app/toastmaster-time
  0 if got same data 
  -1 if there was an error
  */
-- (int)refreshTableTopicsFromOnline {
-	NSError *err = nil;
-	
+- (int)refreshTableTopicsFromOnline {	
 	NSURL *url = [NSURL URLWithString:kOnlineTopicsURL];
 	NSData *data = [NSData dataWithContentsOfURL:url];
 	if (data == nil) {

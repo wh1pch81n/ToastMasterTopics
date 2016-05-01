@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2F6E5C331CD5969500F78B0D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6E5C321CD5969500F78B0D /* Default-568h@2x.png */; };
+		2F877E461CD6AC6800FBC25B /* Icon83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F877E451CD6AC6800FBC25B /* Icon83.5@2x.png */; };
+		2F877E481CD6AD3400FBC25B /* Icon29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F877E471CD6AD3400FBC25B /* Icon29x29@3x.png */; };
+		2F877E4A1CD6B07100FBC25B /* Icon60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F877E491CD6B07100FBC25B /* Icon60x60@3x.png */; };
 		7F185BB4196A61D600055446 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F185BB3196A61D600055446 /* iAd.framework */; };
 		7F185BB8196A65A700055446 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F185BB7196A65A700055446 /* iRate.m */; };
 		7F185BBA196A6AE200055446 /* BigListOfSources in Resources */ = {isa = PBXBuildFile; fileRef = 7F185BB9196A6AE200055446 /* BigListOfSources */; };
@@ -58,6 +61,9 @@
 
 /* Begin PBXFileReference section */
 		2F6E5C321CD5969500F78B0D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		2F877E451CD6AC6800FBC25B /* Icon83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon83.5@2x.png"; sourceTree = "<group>"; };
+		2F877E471CD6AD3400FBC25B /* Icon29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon29x29@3x.png"; sourceTree = "<group>"; };
+		2F877E491CD6B07100FBC25B /* Icon60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon60x60@3x.png"; sourceTree = "<group>"; };
 		7F185BB3196A61D600055446 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		7F185BB6196A65A700055446 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		7F185BB7196A65A700055446 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 			children = (
 				7FA34E241948D564000DB7B5 /* Icon29x29.png */,
 				7FA34E251948D564000DB7B5 /* Icon29x29@2x.png */,
+				2F877E471CD6AD3400FBC25B /* Icon29x29@3x.png */,
 				7FA34E261948D564000DB7B5 /* Icon40x40.png */,
 				7FA34E271948D564000DB7B5 /* Icon40x40@2x.png */,
 				7FA34E281948D564000DB7B5 /* Icon50x50.png */,
@@ -231,10 +238,12 @@
 				7FA34E2B1948D564000DB7B5 /* Icon57x57@2x.png */,
 				7FA34E2C1948D564000DB7B5 /* Icon60x60.png */,
 				7FA34E2D1948D564000DB7B5 /* Icon60x60@2x.png */,
+				2F877E491CD6B07100FBC25B /* Icon60x60@3x.png */,
 				7FA34E2E1948D564000DB7B5 /* Icon72x72.png */,
 				7FA34E2F1948D564000DB7B5 /* Icon72x72@2x.png */,
 				7FA34E301948D564000DB7B5 /* Icon76x76.png */,
 				7FA34E311948D564000DB7B5 /* Icon76x76@2x.png */,
+				2F877E451CD6AC6800FBC25B /* Icon83.5@2x.png */,
 				7FA34E321948D564000DB7B5 /* TMIcon-full.png */,
 				7F9D9B411946593B00EE381B /* TMIcon.pxm */,
 				7F9D9B421946593B00EE381B /* TMLaunchImage.pxm */,
@@ -291,7 +300,6 @@
 				ORGANIZATIONNAME = "Derrick Ho";
 				TargetAttributes = {
 					7F6DDC54191EF74F00925412 = {
-						DevelopmentTeam = SX585CK9M9;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -345,13 +353,16 @@
 				7F9D9B431946593B00EE381B /* TMIcon.pxm in Resources */,
 				7F9D9B441946593B00EE381B /* TMLaunchImage.pxm in Resources */,
 				7FA34E341948D564000DB7B5 /* Icon29x29@2x.png in Resources */,
+				2F877E481CD6AD3400FBC25B /* Icon29x29@3x.png in Resources */,
 				7FA34E3B1948D564000DB7B5 /* Icon60x60.png in Resources */,
 				7F6DDC63191EF74F00925412 /* InfoPlist.strings in Resources */,
 				7F6DDC6C191EF74F00925412 /* Main.storyboard in Resources */,
 				7FA34E3C1948D564000DB7B5 /* Icon60x60@2x.png in Resources */,
 				7FA34E381948D564000DB7B5 /* Icon50x50@2x.png in Resources */,
 				2F6E5C331CD5969500F78B0D /* Default-568h@2x.png in Resources */,
+				2F877E4A1CD6B07100FBC25B /* Icon60x60@3x.png in Resources */,
 				7FA34E371948D564000DB7B5 /* Icon50x50.png in Resources */,
+				2F877E461CD6AC6800FBC25B /* Icon83.5@2x.png in Resources */,
 				7FA34E391948D564000DB7B5 /* Icon57x57.png in Resources */,
 				7FA34E331948D564000DB7B5 /* Icon29x29.png in Resources */,
 				7FA34E351948D564000DB7B5 /* Icon40x40.png in Resources */,

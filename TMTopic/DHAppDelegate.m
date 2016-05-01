@@ -49,8 +49,12 @@ NSString *const kUDLastUpdatedArray = @"kUDLastUpdatedArray";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
-//    [(DHViewController *)self.window.rootViewController launchAsyncURLCall];
+	switch ([[UIApplication sharedApplication] backgroundRefreshStatus]) {
+		case UIBackgroundRefreshStatusAvailable:
+			break;
+		default:
+			[(DHViewController *)self.window.rootViewController launchAsyncURLCall];
+	}
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
